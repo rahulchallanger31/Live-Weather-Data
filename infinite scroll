@@ -1,0 +1,299 @@
+ <!Doctype HTML>
+
+<html>
+
+    <head>
+
+        <title>
+
+            Single Page App
+
+        </title>
+
+        
+
+        <style>
+
+            @keyframes move{
+
+                0%{
+
+                    left: 0;
+
+                }
+
+                50%{
+
+                    left: 100%;
+
+                }
+
+                100%{
+
+                    left: 0;
+
+                }
+
+            }
+
+            h1{
+
+                position: relative;
+
+                animation-name: move;
+
+                animation-duration: 2s;
+
+                animation-fill-mode: forwards;
+
+                animation-iteration-count: 5;
+
+            }
+
+            
+
+            div{
+
+                display: none;
+
+            }
+
+            
+
+            @keyframes hide{
+
+                0%{
+
+                    opacity: 1;
+
+                    height: 100px
+
+                }
+
+                75%{
+
+                    opacity: 0;
+
+                    height: 100px;
+
+                }
+
+                100%{
+
+                    opacity: 0;
+
+                    height: 0px;
+
+                }
+
+            }
+
+            .box{
+
+                height: 100px;
+
+                text-align: center;
+
+                background-color: lawngreen;
+
+                padding: 5px;
+
+                font-family: cursive;
+
+                
+
+                animation-name: hide;
+
+                animation-duration: 1s;
+
+                animation-fill-mode: forwards;
+
+                animation-play-state: paused;
+
+            }
+
+        </style>
+
+        
+
+    </head>
+
+    
+
+    <body>
+
+    <h1>Catch Me</h1>
+
+        
+
+    <button data-page='page1'>Page1</button>
+
+    <button data-page='page2'>Page2</button>
+
+    <button data-page='page3'>Page3</button>
+
+        
+
+    <div id='page1'> <h1>Page 1</h1>
+
+    </div>
+
+    <div id='page2'> <h1>Page 2</h1>
+
+    </div>
+
+    <div id='page3'> <h1>Page 3</h1>
+
+    </div>
+
+    
+
+        
+
+    <script>
+
+        function nav(page){
+
+            document.querySelectorAll('div').forEach(div => {
+
+                div.style.display = 'none' ;
+
+            })
+
+            document.querySelector(`#${page}`).style.display = 'block' ;
+
+        }
+
+        
+
+        let start = 1;
+
+        let end =20;
+
+        
+
+        
+
+        // function run when scroll bar hit end.
+
+        function load(){
+
+            start = end+1;
+
+            end = end + 20 -1;
+
+            
+
+            for(let i=start; i<=end; i++){
+
+                let p = document.createElement('p');
+
+                p.innerHTML = `Box Number:- ${i}  <button> Hide </button>`;
+
+                p.className += 'box';
+
+                document.body.appendChild(p);
+
+                
+
+//                let b = document.createElement('button');
+
+//                b.innerHTML = 'Hide';
+
+//                p.appendChild(b);
+
+            }
+
+        }
+
+        
+
+        // when page come to end 20 plus blocks appear.
+
+        window.onscroll = () => {
+
+            if(window.scrollY + window.innerHeight >= document.body.offsetHeight){
+
+                load();
+
+            }
+
+        }
+
+        
+
+        // click on button to HIDE
+
+        document.addEventListener('click', event => {
+
+            let element = event.target;
+
+            if(element.className === 'hide'){
+
+                element.parentNode.style.animationPlayState = 'running';
+
+                element.parentNode.addEventListener('animationend', () => {
+
+                    element.parentNode.remove();      
+
+                })
+
+            }
+
+        })
+
+        
+
+        
+
+        // 20 blocks appear when page load.
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            
+
+            for(let i=start; i<=end; i++){
+
+                let p = document.createElement('p');
+
+                p.innerHTML = `Box Number:- ${i}  <button class='hide'> Hide </button>`;
+
+                p.className += 'box';
+
+                document.body.appendChild(p);
+
+                
+
+//                let b = document.createElement('button');
+
+//                b.innerHTML = 'Hide';
+
+//                p.appendChild(b);
+
+            }
+
+            
+
+            // multi page opening from button
+
+            document.querySelectorAll('button').forEach(button => {
+
+                button.onclick = function(){
+
+                    nav(this.dataset.page);
+
+                }
+
+            })
+
+        })
+
+    </script>    
+
+    
+
+    </body>
+
+    
+
+</html>
