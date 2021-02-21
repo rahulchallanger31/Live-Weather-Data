@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dark Theme</title>
+    
+        <style>
+            body{
+                transition: background 0.3s linear, color 0.3s linear;
+            }
+            body.active{
+                background-color: black;
+                color: rgb(180, 180, 180);
+            }
+            
+            h1, p, div{
+                text-align: center;
+            }
+            div{
+                margin-top: 15%;
+            }
+            div label{
+                background-color: rebeccapurple;
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                user-select: none;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+            }
+            div label.active{
+                background-color: white;
+            }
+            div input{
+                visibility: hidden;
+            }
+    
+        </style>
+    </head>
+    
+    <body>
+        <div>
+            <input type="checkbox" name="darkTheme" id="darkTheme"/>
+            <label for="darkTheme" id="dark"></label>
+        </div>
+            
+        <h1>Change to Dark Theme</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id diam lacinia, fringilla sapien in, aliquet risus. Mauris tempus nulla et congue molestie. Phasellus facilisis iaculis enim ac efficitur. Aenean arcu dolor, elementum a massa non, aliquam dignissim nisl. Morbi at dui dictum, tincidunt mi quis, interdum massa. Etiam rutrum turpis eu ante mattis, at vestibulum metus tristique. Nunc pretium luctus ante in porttitor. Cras elit purus, commodo a diam nec, varius dapibus metus. Vivamus scelerisque vitae eros non molestie. Proin sit amet est condimentum, vulputate erat ac, imperdiet dolor. Fusce placerat dolor eget scelerisque sollicitudin. Donec interdum lorem in arcu luctus luctus. Fusce varius justo porttitor velit ornare fermentum. Phasellus porttitor et urna sit amet rhoncus. Nulla ante libero, tincidunt in scelerisque gravida, pulvinar in ligula.</p>
+        
+        <script>
+            document.getElementById("darkTheme").addEventListener("change", (e)=>{
+                document.body.classList.toggle("active");
+                document.getElementById("dark").classList.toggle("active");
+            });
+        
+        </script>
+    
+    </body>
+    
+</html>

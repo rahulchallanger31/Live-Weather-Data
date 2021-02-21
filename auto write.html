@@ -1,0 +1,39 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>AUto Write Text</title>
+        
+        <style>
+            body{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: rebeccapurple;
+                color: white;
+                font-weight: bold;
+            }    
+        </style>
+    </head>
+    
+    <body>
+        
+        
+        <script>
+            const txt = "This is Auto write Content, with the help of JS.";
+            let index = 0;
+            
+            function autoWrite(){
+                document.body.innerText = txt.slice(0, index);
+                index++;
+                
+                if(index > txt.length-1){
+                    index = 0;
+                }
+            }
+            setInterval(autoWrite, 100);
+            
+        </script>
+    </body>
+    
+</html>

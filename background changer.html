@@ -1,0 +1,71 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>Background Changer</title>
+        
+        
+        <style>
+            @keyframes dj{
+                0%{
+                    transform: translate(0px, 0px);
+                }
+                50%{
+                    transform: translate(2px, 2px);
+                }
+                100%{
+                    transform: translate(0px, 0px);
+                }
+            }
+            body{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 20%;
+            }
+            
+            button{
+                border: none;
+                background-color: rebeccapurple;
+                color: white;
+                padding: 10px;
+                
+            }
+            button.active{
+                animation: dj 0.2s ;
+                animation-iteration-count: infinite;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <button id="btn">Change Background</button>
+        
+        <script>
+            let runInterval = (function(){
+                let check = 0;
+                let bgAnimate;
+                return function(){
+                    if(check == 0){
+                        bgAnimate = setInterval(changeBg, 200);
+                        check = 1;
+                        document.getElementById("btn").classList.add("active");
+                    }else{
+                        clearInterval(bgAnimate);
+                        check = 0;
+                        document.getElementById("btn").classList.remove("active");
+                    }
+                }
+            })()
+            
+            document.getElementById("btn").addEventListener("click", runInterval);
+            
+            
+            function changeBg(){
+                document.body.style.background = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+            }
+            
+        </script>
+    </body>
+    
+</html>

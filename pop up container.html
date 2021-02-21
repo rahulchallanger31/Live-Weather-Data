@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pop Up</title>
+        
+        <style>
+            #open{
+                position: absolute;
+                background-color: rebeccapurple;
+                color: white;
+                left: 50%;
+                margin-top: 20%;
+                padding: 10px;
+            }
+            
+            
+            
+            #popUp{
+                display: none;
+                position: absolute;
+                left: 40%;
+                top: 8%;
+                background-color: white;
+                width: 300px;
+                height: 200px;
+                margin-top: 15%;
+                padding: 10px;
+                font-family: cursive;
+            }
+            #popUp.active{
+                display: block;
+                z-index: 2;
+            }
+            #popUp h2{
+                color: red;
+            }
+            #popUp button{
+                font-weight: bold;
+                position: relative;
+                margin-left: 90%;
+                background-color: white;
+                border: none;
+                font-size: 18px;
+            }
+            
+            #blackishScreen{
+                visibility: hidden;
+                background-color: rgba(0,0,0,0.5);
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 1;
+            }
+            #blackishScreen.active{
+                visibility: visible;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <button id="open">Open</button>
+        
+        
+        <div id="popUp">
+            <button id="close">x</button>
+            <h2>Instagram</h2>
+            <p>I got 1.3K Followers on Instagram, Yipee</p>
+        </div>
+        
+        <div id="blackishScreen"></div>
+    
+        <script>
+            document.getElementById("open").addEventListener("click", popUp);
+            document.getElementById("close").addEventListener("click", popUp);
+            function popUp(){
+                const pop = document.getElementById("popUp");
+                const blackish = document.getElementById("blackishScreen");
+                pop.classList.toggle("active");
+                blackish.classList.toggle("active");
+                
+            }
+        </script>
+    </body>
+    
+</html>

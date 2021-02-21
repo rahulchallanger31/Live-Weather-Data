@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Hamburger Icon</title>
+        
+        <style>
+            .hamburger{
+                padding: 10px;
+                color: white;
+                background-color: rebeccapurple;
+                position: fixed;
+                left: 10px;
+                top: 10px;
+                transition: 0.5<s ease-in-out;
+            }
+            .hamburger.active{
+                left: 100px;
+            }
+            
+            nav{
+                transform: translateX(-100%);
+                background-color: rebeccapurple;
+                height: 600px;
+                margin-left: 0px;
+                position: fixed;
+                left: 0;
+                top: 0;
+                transition: transform 0.5s ease-in-out;
+            }
+            nav.active{
+                transform: translateX(0);
+                
+            }
+            
+            nav ul{
+                padding: 20px;
+                list-style-type:  none;
+            }
+            nav li{
+                text-align: center;
+            }
+            nav li a{
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                font-weight: bold;
+                line-height: 40px;
+                font-size: 18px;
+            }
+        </style>
+        
+    </head>
+    
+    <body>
+        <button class="hamburger">☰</button>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Services</a></li>
+            </ul>
+        </nav>
+        
+        
+        <script>
+            let btn = document.querySelector(".hamburger");
+            let nav = document.querySelector("nav");
+            btn.addEventListener("click", () => {
+                btn.classList.toggle('active');                
+                nav.classList.toggle('active');                
+            })
+            
+        </script>
+    </body>
+    
+</html>

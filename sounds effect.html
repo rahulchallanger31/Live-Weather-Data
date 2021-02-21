@@ -1,0 +1,113 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>Sound Effect</title>
+        
+        <style>
+            @keyframes dj{
+                0%{
+                    transform: translate(0px, 0px);
+                }
+                50%{
+                    transform: translate(2px, 2px);
+                }
+                100%{
+                    transform: translate(0px, 0px);
+                }
+            }
+            
+            body{
+                background-color: aliceblue;
+            }
+            button{
+                margin-left: 35%;
+                margin-top: 20%;
+            }
+            .songBtn{
+                background-color: rebeccapurple;
+                color: white;
+                font-family: cursive;
+                margin-left: 10px;
+                border: none;
+                border-radius: 10%;
+                padding: 10px;
+            }
+            .active{
+                animation: dj 0.2s ;
+                animation-iteration-count: infinite;
+            }
+            #pause{
+                background-color: red;
+                color: white;
+                border: none;
+                border-radius: 10%;
+                font-family: cursive;
+                padding: 10px;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <audio id="Matargashti" src="Matargashti.mp3"></audio>
+        <audio id="GOAT" src="GOAT%20Diljit%20Dosanjh.mp3"></audio>
+        <audio id="illahi" src="iIlahi.mp3"></audio>
+        <audio id="Dheeme" src="Dheeme%20Dheeme.mp3"></audio>
+        <audio id="Vele" src="Vele%20(SongsMp3.Com).mp3"></audio>
+        <button id="pause">Pause</button>
+        
+        <script>
+            let bgAnimate;
+            // background Changer
+            let runInterval = (function(){
+                let check = 0;
+                return function(){
+                    if(true){
+                        bgAnimate = setInterval(changeBg, 200);
+                        
+                    }
+                }
+            })()
+            
+            
+            // change BG
+            function changeBg(){
+                document.body.style.background = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+            }
+                
+            // Song Buttons
+            let songs = ["Matargashti", "GOAT", "Dheeme", "Vele", "illahi"];
+            songs.forEach((song)=>{
+                let btn = document.createElement("button");
+                btn.innerHTML = song;
+                btn.classList.add("songBtn");
+                document.body.appendChild(btn);
+                btn.addEventListener("click", ()=>{
+                    pauseSong();
+                    btn.classList.add("active");
+                    runInterval();
+                    document.getElementById(song).play();
+                })
+                
+            })
+            
+            
+            
+            // Pause Song             
+            document.getElementById("pause").addEventListener("click", pauseSong)
+            
+            function pauseSong(){
+                let i = 0;
+                songs.forEach((song)=>{
+                    document.getElementById(song).pause();
+                    // Stop Button Shaking
+                    document.querySelectorAll(".songBtn")[i].classList.remove("active");
+                    i++;
+                })
+                clearInterval(bgAnimate);
+            }
+            
+        </script>
+    </body>
+    
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Falling Emoji</title>
+        
+        <style>
+            @keyframes fall{
+                to{
+                    transform: translateY(100vh);
+                }
+            }
+            
+            .emoji{
+                position: fixed;
+                top: -1vh;
+                display: inline;
+                animation: fall 5s forwards;
+        </style>
+    </head>
+    
+    
+    <body>
+        
+        <script>
+            function fallingEmoji(){
+                const e = document.createElement("div");
+                e.innerHTML = "😂";
+                e.classList.add("emoji");
+                document.body.appendChild(e);
+                e.style.left = Math.random()*100 + "vw"; // emoji fall from top from every point
+                
+                setTimeout(()=>{
+                    e.remove();
+                }, 5000);
+                
+            }
+            setInterval(fallingEmoji, 300);
+        
+        </script>
+    </body>
+    
+</html>

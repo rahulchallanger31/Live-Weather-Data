@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Notification Generator</title>
+        
+        
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+            
+            body{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            button{
+                position: absolute;
+                top: 50%;
+            }
+            
+            .notification{
+                background-color: rebeccapurple;
+                color: white;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 10px;
+            }
+            #notify{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <button id="btn">Click To generate Notification</button>
+        
+        <div id="notify"></div>
+        
+        <script>
+            document.querySelector("#btn").addEventListener("click", createNotify);
+            function createNotify(){
+                let d = document.createElement("div");
+                d.innerHTML = "Notification created";
+                d.classList.add("notification");
+                
+                document.getElementById("notify").appendChild(d);
+                
+                setTimeout(() => {
+                    d.remove();    // Notification remove after 3 seconds
+                }, 3000);
+            }
+        </script>
+    
+    </body>
+    
+</html>
