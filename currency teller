@@ -1,0 +1,96 @@
+ <!Doctype HTML>
+
+<html>
+
+    <head>
+
+        <title>
+
+            Currency
+
+        </title>
+
+    </head>
+
+
+
+    <body>
+
+        base USD
+
+        <form>
+
+            <input id='currency' autofocus type='text' placeholder='Currency'>
+
+            <input id='submit' type='submit' value='Convert'>
+
+        </form>
+
+
+
+        <h2 id='statement'> </h2>
+
+
+
+        <script>
+
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                document.querySelector('#submit').onclick = () => {
+
+                    const curr = document.querySelector('#currency').value.toUpperCase() ;
+
+                    console.log(curr) ;
+
+                    fetch('https://v6.exchangerate-api.com/v6/d5174fd2a456853c164e7d82/latest/USD')
+
+                    .then(response => response.json())
+
+                    .then(data => {
+
+                          const val = data.conversion_rates[curr] ;
+
+                          console.log(val) ;
+
+                          if(val == undefined){
+
+                            document.querySelector('#statement').innerHTML = 'Invalid Input' ;
+
+                          }else{
+
+                            document.querySelector('#statement').innerHTML = `1 USD =  ${val.toFixed(3)} ${curr}` ;
+
+                          }
+
+
+
+
+
+                    }) // If error occur, like present link got Invalid
+
+                    .catch(error => {
+
+                        console.log('Error:', error);
+
+                    })
+
+
+
+                    return false ;
+
+                }
+
+            })
+
+
+
+        </script>
+
+    </body>
+
+
+
+</html>
+
