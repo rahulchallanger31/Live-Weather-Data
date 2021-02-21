@@ -1,0 +1,93 @@
+ <!DOCTYPE HTML>
+
+<html>
+
+    <title>
+
+        Asynchronous Javascript
+
+    </title>
+
+    
+
+    <body>
+
+        <h1>Asynchronous Javascript</h1>
+
+    </body>
+
+    
+
+    <script>
+
+        function getWeather(woeid){
+
+            fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`)
+
+                .then(result => {
+
+                    console.log(result);
+
+                    return result.json();
+
+                })
+
+                .then(data => {
+
+                    //console.log(data)
+
+                    const today = data.consolidated_weather[0];
+
+                    console.log(`Temperature today is ${today.max_temp} in ${data.title}`);
+
+                })
+
+                .catch(error => alert(error));
+
+        }
+
+        
+
+        getWeather(2487956); // San Ferancisco
+
+        getWeather(44418);   // London
+
+        
+
+        
+
+        async function getWeatherAW(woeid){
+
+            try{
+
+                const result = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`);
+
+                const data = await result.json();
+
+                const today = data.consolidated_weather[0];
+
+                console.log(`Temperature today is ${today.max_temp} in ${data.title}`); 
+
+            }
+
+            catch(error){
+
+                alert('error');
+
+            }
+
+        } 
+
+        
+
+        getWeatherAW(2487956); // San Ferancisco
+
+        getWeatherAW(44418);   // London
+
+        
+
+    </script>
+
+    
+
+</html>
