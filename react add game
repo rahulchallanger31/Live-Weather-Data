@@ -1,0 +1,241 @@
+ <!Doctype html>
+
+<html>
+
+    <head>
+
+    <!-- react -->
+
+        <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+
+    <!-- React DOM -->
+
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel -->
+
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+        
+
+        <title>
+
+            Addition Game
+
+        </title>
+
+        
+
+        <style>
+
+        
+
+            #app{
+
+                text-align: center;
+
+                font-family: sans-serif;
+
+            }
+
+            
+
+            #problem{
+
+                font-size: 72px;
+
+            }
+
+            
+
+            #win{
+
+                color: green;
+
+                font-size: 72px;
+
+                text-align: center;
+
+                font-style: bold;
+
+            }
+
+        </style>
+
+        
+
+    </head>
+
+    
+
+    <body>
+
+        <div></div>
+
+        
+
+        <script type='text/babel'>
+
+        
+
+            class App extends React.Component {
+
+                constructor(props){
+
+                    super(props);
+
+                    
+
+                    this.state = {
+
+                        score: 0,
+
+                        right: 0,
+
+                        wrong: 0,
+
+                        num1: Math.ceil(Math.random() * 10),
+
+                        num2: Math.ceil(Math.random() * 10),
+
+                        response: ''
+
+                    }
+
+                }
+
+                
+
+                render(){
+
+                    if(this.state.score === 5){
+
+                        return(
+
+                            <div id='app'>
+
+                                <div id='win'>You Win!</div>
+
+                                <button onClick={this.resetGame}>Reset</button>
+
+                            </div>
+
+                        )
+
+                    }
+
+                    return(
+
+                        <div id='app'>
+
+                            <div id='problem'>{this.state.num1} + {this.state.num2}</div>
+
+                            <input autofocus onKeyPress={this.keyPress} onChange={this.changedInput} />
+
+                            <div>Score: {this.state.score}</div>
+
+                            <div>Response: {this.state.response}</div>
+
+                            <div>Right: {this.state.right}  Wrong: {this.state.wrong}</div>
+
+                            <p>** Press Enter to Submit **</p>
+
+                        </div>
+
+                    )
+
+                }
+
+                
+
+                resetGame = () => {
+
+                    this.setState({
+
+                        score: 0,
+
+                        right: 0,
+
+                        wrong: 0
+
+                    })
+
+                }
+
+                
+
+                changedInput = (event) => {
+
+                    this.setState({
+
+                        response: event.target.value
+
+                    });
+
+                }
+
+                
+
+                keyPress = (event) => {
+
+                    if(event.key === "Enter"){
+
+                        let answer = this.state.num1 + this.state.num2;
+
+                        let response = parseInt(this.state.response);
+
+                        if(response === answer){
+
+                            // correct answer
+
+                            this.setState(state => ({
+
+                                score: state.score + 1,
+
+                                response: '',
+
+                                num1: Math.ceil(Math.random() * 10),
+
+                                num2: Math.ceil(Math.random() * 10),
+
+                                right: state.right + 1
+
+                            }));
+
+                            event.target.value = '';
+
+                        }else{
+
+                            this.setState(state => ({
+
+                                score: state.score - 1,
+
+                                response: '',
+
+                                wrong: state.wrong + 1
+
+                            }))
+
+                            event.target.value = '';
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
+            ReactDOM.render(<App />, document.querySelector('div'))
+
+    
+
+        </script>
+
+    </body>
+
+    
+
+</html>
